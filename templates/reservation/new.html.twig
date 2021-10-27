@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/navbar.css" type="text/css" media="screen">
+<style>
+.login-wrapper {
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+li a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+}
+li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #FFD12B;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+li:hover::after {
+    width: 100%;
+}
+.form {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    padding: 80px 40px 40px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+}
+
+.form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    transform: skewX(-18deg);
+    transform-origin: bottom left;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.form img {
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+    width: 100px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.form h2 {
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    color: #FFD12B;
+}
+
+.form .input-group {
+    position: relative;
+}
+
+.form .input-group input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+}
+
+
+.btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    outline: none;
+    background: #FFD12B;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+</style>
+<div class="content">
+            <div class="login-wrapper">
+                {{ form_start(form, { 'attr': {'class': 'form'}})}}
+                    <img src="/pictures/logo1.png" alt="">
+                    <h2>Réservation</h2>
+                    <div class="input-group">
+                        {{ form_row(form.nom) }}
+                    <div class="input-group">
+                        {{ form_row(form.prenom) }}
+                    </div>
+                    <div class="input-group">
+                         {{ form_row(form.phone, {label: "Téléphone"})}}
+                    </div>
+                    <div class="input-group">
+                        {{ form_row(form.date, {label: 'Date'})}}
+                    </div>
+                      <button class="btn">{{ button_label|default('Save') }}</button>
+                    {{ form_end(form) }}
+            </div>    
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+ <div class="navbar">
+            <img src="/pictures/logo1.png" class="logo">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href={{path("reservation_new")}}>Réservation</a></li>
+                {% if is_granted('ROLE_USER') == false %}
+                    <li><a href={{path("app_register")}}>Inscription</a></li>
+                    <li><a href={{path("app_login")}}>Connexion</a></li>
+                {% endif %} 
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('app_logout') }}">Deconnexion</a></li>
+                {% endif %} 
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href={{path("reservation_index")}}>Administrateur</a></li>   
+                {% endif %} 
+            </ul>
+        </div>
