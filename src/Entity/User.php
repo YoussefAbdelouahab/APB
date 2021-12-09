@@ -49,9 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $nickname;
+    private $phone;
 
     public function getId(): ?int
     {
@@ -166,14 +166,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNickname(): ?string
+    public function getPhone(): ?string
     {
-        return $this->nickname;
+        return $this->phone;
     }
 
-    public function setNickname(string $nickname): self
+    public function setPhone(string $phone): self
     {
-        $this->nickname = $nickname;
+        $this->phone = $phone;
 
         return $this;
     }

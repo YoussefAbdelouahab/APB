@@ -6,8 +6,9 @@
 <link rel="stylesheet" href="/navbar.css" type="text/css" media="screen">
 <style>
 .login-wrapper {
-    height: 80vh;
-    width: 100vw;
+    width: 100%;
+    position: absolute;
+    margin-top: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,7 +101,7 @@
                         {{ form_row(registrationForm.prenom) }}
                     </div>
                     <div class="input-group">
-                         {{ form_row(registrationForm.nickname, {label: "Nom d'utilisateur"}) }}
+                         {{ form_row(registrationForm.phone, {label: "Téléphone"}) }}
                     </div>
                     <div class="input-group">
                          {{ form_row(registrationForm.email) }}

@@ -6,8 +6,9 @@
 <link rel="stylesheet" href="/navbar.css" type="text/css" media="screen">
 <style>
 .login-wrapper {
-    height: 80vh;
-    width: 100vw;
+    width: 100%;
+    position: absolute;
+    margin-top: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,29 +105,7 @@
     margin-bottom: 10px;
 }
 
-.forgot-pw {
-    color: inherit;
-}
 
-#forgot-pw {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0;
-    z-index: 1;
-    background: #fff;
-    opacity: 0;
-    transition: 0.6s;
-}
-
-#forgot-pw:target {
-    height: 100%;
-    opacity: 1;
-}
 
 .close {
     position: absolute;

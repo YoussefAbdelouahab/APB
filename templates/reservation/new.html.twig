@@ -6,8 +6,9 @@
 <link rel="stylesheet" href="/navbar.css" type="text/css" media="screen">
 <style>
 .login-wrapper {
-    height: 80vh;
-    width: 100vw;
+    width: 100%;
+    position: absolute;
+    margin-top: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,7 +129,7 @@ li:hover::after {
                     <div class="input-group">
                         {{ form_row(form.date, {label: 'Date'})}}
                     </div>
-                      <button class="btn">{{ button_label|default('Save') }}</button>
+                      <button class="btn">{{ button_label|default('Réserver') }}</button>
                     {{ form_end(form) }}
             </div>    
 </div>
