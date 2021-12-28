@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
+use App\Form\ReservationType;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,7 +14,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(ReservationRepository $reservationRepository, ReservationRepository $reservation): Response
     {   
         if($this->getUser() == null){
             return $this->render('home/index.html.twig', [
@@ -20,7 +23,8 @@ class HomeController extends AbstractController
         }else {
             $infos = $this->getUser();
             $name = $infos->getNom();
-            return $this->render('home/index.html.twig', compact('name'));
+            $res = $reservation->findByNom($name);
+            return $this->render('home/index.html.twig', compact('name', 'res'));
         }
 
     }

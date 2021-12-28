@@ -122,24 +122,130 @@ a {
 .offre {
     margin-bottom: 40px;
 }
+
+.offre_moment h2 {
+    positon: absolute;
+    font-size: 2em;
+    color : #fff;
+    letter-spacing: 8px;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0002);
+    animation: animate 3s linear infinite;
+}
+.offre_moment h3 {
+    positon: absolute;
+    color : #fff;
+    letter-spacing: 8px;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0002);
+    animation: animate 3s linear infinite;
+}
+@keyframes animate {
+    0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92% {
+        color: #fff;
+        text-shadow: none
+    }
+    18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100% {
+        color: #FFD12B;
+        text-shadow: 0 0 10px #FFD12B,
+        0 0 20px #FFD12B,
+        0 0 40px #FFD12B,
+        0 0 80px #FFD12B,
+        0 0 160px #FFD12B;
+    }
+}
+.styled-table {
+    margin: auto;
+    display: initial;
+    justify-content: center;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+.styled-table thead tr {
+    color: black;
+    background-color: #FFD12B;
+    color: #FFD12B;
+    text-align: left;
+
+}
+.styled-table th{
+    color: black;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border-top-left-radius : 10px;
+    border-top-right-radius : 10px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #FFD12B;
+}
+
+.styled-table button {
+    width: 100px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid gold;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
 </style>
 
 <div class="content">
-            <h1>Bienvenue Chez APB</h1>
+            <h1>Auto Pare Brise</h1>
             {% if name is defined %}
-                <p>Vous etes connecter en tant que : {{ name }} . </p>
-            {% endif %} 
-            <p>Auto Pare Brise<br>Changement de tout vitrage automobile.</p>
-
+                <p>Bienvenue monsieur/madame {{name}} chez APB. <br/>
+                Vous êtes connectés.</p>
+            {% else %} 
+            <p>Bienvenue monsieur/madame chez APB. <br/>
+            <p>Changement de tout vitrage automobile.</p>
+            {% endif %}
             <div class="offre_moment">
-                <u><h2> Offre du moment !! </h2></u>
+                <h2> Offre du moment !! </h2>
+                <br>
                 <p class="offre">Franchise offerte + 100€ a 150€.</p>
+                {% if res is defined %}
+                <h3>Mes réservation : </h3> <br>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Téléphone</th>
+                            <th>Date</th>
+                            <th>Suppréssion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for reservations in res %}
+                        <tr>
+                            <td>{{ reservations.nom }}</td>
+                            <td>{{ reservations.prenom }}</td>   
+                            <td>{{ reservations.phone }}</td>
+                            <td>{{ reservations.date|date('d/m/Y H:i:s') }}</td>
+                            <td><button type="button"><a href={{path('reservation_show', { 'id': reservations.id })}}><span></span>Supprimer</a></button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
             </div>
-
-
             <div>
-                <button type="button"><a href={{path("home_plus")}}><span></span>Voir Plus</a></button>
-                <button type="button"><a href={{path("reservation_new")}}><span></span>Réservation</a></button>
+                <button type="button"><a href={{path("reservation_new")}}><span></span>Réserver</a></button>
             </div>
 
 </div>

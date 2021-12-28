@@ -71,7 +71,12 @@ img {
                     end: 'dayGridMonth,timeGridWeek'
                 },
                 events: {{ data|raw }},
-                eventResizableFromStart: true
+                eventResizableFromStart: true,
+            })
+
+            calendar.on('eventClick', (e) => {
+                const a = e.event._def.publicId
+                window.location.href = `/reservation/${a}`;
             })
         calendar.render()
     }

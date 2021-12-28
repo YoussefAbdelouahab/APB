@@ -6,6 +6,7 @@ use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ReservationType extends AbstractType
 {
@@ -15,7 +16,8 @@ class ReservationType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('phone')
-            ->add('date')
+            ->add('date', DateTimeType::class,['data'   => new \DateTime(),
+            'attr'   => ['min' => ( new \DateTime() )->format('Y-m-d H:i:s')]])
         ;
     }
 

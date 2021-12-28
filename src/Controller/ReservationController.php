@@ -28,9 +28,7 @@ class ReservationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reservation);
             $entityManager->flush();
-
-            return $this->redirectToRoute('reservation_index', [], Response::HTTP_SEE_OTHER);
-            
+            return $this->redirectToRoute('home_plus', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('reservation/new.html.twig', [
@@ -79,7 +77,11 @@ class ReservationController extends AbstractController
             $entityManager->remove($reservation);
             $entityManager->flush();
         }
-
-        return $this->redirectToRoute('reservation_index', [], Response::HTTP_SEE_OTHER);
+        $role = $this->getUser()->getRoles();
+        if($role[0] == "ROLE_USER"){
+            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+        }else{
+            return $this->redirectToRoute('reservation_index', [], Response::HTTP_SEE_OTHER);
+        }
     }
 }

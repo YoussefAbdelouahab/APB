@@ -1,38 +1,138 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Reservation{% endblock %}
-
+{% block title %}}Show Reservation{% endblock %} 
 {% block body %}
+
+<style>
+* {
+    color: black;
+    justify-content: center;
+    text-align: center;
+}
+img {
+    height: 100px;
+}
+
+.logo {
+    width: 120px;
+    cursor: pointer;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+    color: black;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+}
+
+.navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #FFD12B;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+.styled-table {
+    margin: auto;
+    display: initial;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    color: black;
+    background-color: #FFD12B;
+    color: #FFD12B;
+    text-align: left;
+}
+.styled-table th{
+    color: black;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #FFD12B;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #FFD12B;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #FFD12B;
+}
+.button {
+  background-color: #FFD12B;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+</style>
+
     <h1>Reservation</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ reservation.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ reservation.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ reservation.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ reservation.phone }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ reservation.date ? reservation.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('reservation_index') }}">back to list</a>
-
-    <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
-
+    <br>
+    <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.nom }}</td>
+            <td>{{ reservation.prenom }}</td>   
+            <td>{{ reservation.phone }}</td>
+            <td>{{ reservation.date ? reservation.date|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<br/>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('reservation_index') }}" class="button">Administrateur</a>
+    {% endif %}
+    {% if is_granted('ROLE_USER') %}
+    <a href="{{ path('home') }}" class="button">Page D'acceuil</a>
+    {% endif %}
+    <br>
+    <br>
     {{ include('reservation/_delete_form.html.twig') }}
 {% endblock %}
